@@ -17,7 +17,7 @@ import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import express, { type Request, type Response } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fs from 'fs';
+import fs, { readFileSync } from 'fs';
 import { readFile } from 'fs/promises';
 import { findDefinition } from './ts-def.js';
 const __filename = fileURLToPath(import.meta.url);
@@ -125,10 +125,12 @@ class RubiiDbServer {
             );
           }
 
+          const fileContent = readFileSync(file_path as string, 'utf8');
+
           return {
             content: [{
               type: "text",
-              text: JSON.stringify(results, null, 2) || `No results found for ${JSON.stringify(request.params.arguments, null, 2)}`
+              text: JSON.stringify(results, null, 2) || `No results found for ${JSON.stringify(request.params.arguments, null, 2)} with file content ${fileContent}`
             }]
           };
         } catch (error) {
