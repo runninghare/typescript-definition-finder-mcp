@@ -115,7 +115,7 @@ class RubiiDbServer {
             if (!request.params.arguments) {
               throw new McpError(ErrorCode.InvalidParams, "Missing arguments");
             }
-            const { file_path, column_number, line_content } = request.params.arguments;
+            var { file_path, column_number, line_content } = request.params.arguments;
             var results = findDefinition(file_path as string, column_number as number, line_content as string);
           } else {
             // throw error
@@ -128,7 +128,7 @@ class RubiiDbServer {
           return {
             content: [{
               type: "text",
-              text: JSON.stringify(results, null, 2)
+              text: JSON.stringify(results, null, 2) || `No results found for ${JSON.stringify(request.params.arguments, null, 2)}`
             }]
           };
         } catch (error) {
