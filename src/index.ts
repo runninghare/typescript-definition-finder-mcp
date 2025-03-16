@@ -38,9 +38,9 @@ const tools =  [
               "description": "The absolute path to the current typescript file (e.g., '/remote/.../src/index.ts')",
               "required": true
             },
-            "pattern_to_find_line_number": {
+            "line_content": {
               "type": "string",
-              "description": "Pass the entire line of the symbol you want to find the definition of. The pattern will be used to find the line number in the file instead of using the line_number parameter which AI Editor often has trouble with. The first line containing this pattern will be used.",
+              "description": "Pass the entire line of the symbol you want to find the definition of. The line content will be used to find the line number in the file instead of directly passing line number which AI Editor often has trouble with. The first line matching the content will be used.",
               "required": true
             },
             "column_number": {
@@ -49,7 +49,7 @@ const tools =  [
                 "required": true
             }
           },
-          "required": ["file_path", "pattern_to_find_line_number", "column_number"]
+          "required": ["file_path", "line_content", "column_number"]
         }
     }
   ];
@@ -118,8 +118,8 @@ class RubiiDbServer {
             if (!request.params.arguments) {
               throw new McpError(ErrorCode.InvalidParams, "Missing arguments");
             }
-            const { file_path, line_number, column_number, pattern_to_find_line_number } = request.params.arguments;
-            var results = findDefinition(file_path as string, line_number as number, column_number as number, undefined, pattern_to_find_line_number as string);
+            const { file_path, column_number, line_content } = request.params.arguments;
+            var results = findDefinition(file_path as string, column_number as number, line_content as string);
           } else {
             // throw error
             throw new McpError(

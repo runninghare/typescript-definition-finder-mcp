@@ -49,9 +49,10 @@ The tool requires three parameters:
    - The absolute path to the current TypeScript file
    - Example: `/path/to/your/project/src/index.ts`
 
-2. `line_number` (number):
-   - The 1-based line number where the symbol appears
-   - Must be the exact line where the symbol is used
+2. `line_content` (string):
+   - The entire line containing the symbol you want to find the definition of
+   - Used to locate the correct line in the file
+   - Must match the line exactly as it appears in the file
 
 3. `column_number` (number):
    - The 1-based column number where the symbol starts
@@ -65,11 +66,11 @@ Given this import statement:
 ```typescript
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 ```
-If this line is on line 4 and `StdioServerTransport` starts at column 10, you would use:
+To find the definition of `StdioServerTransport`, which starts at column 10, you would use:
 ```json
 {
   "file_path": "~/my-mcp-project/src/index.ts",
-  "line_number": 4,
+  "line_content": "import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\";",
   "column_number": 10
 }
 ```
@@ -93,11 +94,11 @@ class MyService {
   private transport: StdioServerTransport;
 }
 ```
-If `StdioServerTransport` is on line 15 and starts at column 20, use:
+To find the definition of `StdioServerTransport`, which starts at column 20, use:
 ```json
 {
   "file_path": "/path/to/project/src/service.ts",
-  "line_number": 15,
+  "line_content": "  private transport: StdioServerTransport;",
   "column_number": 20
 }
 ```
