@@ -3,7 +3,8 @@
 import * as ts from 'typescript';
 import { readFileSync, existsSync } from 'fs';
 
-export function findDefinition(filePath: string, line: number, column: number, projectPath?: string, patternToFindLineNumber?: string) {
+export function findDefinition(filePath: string, column: number, projectPath?: string, patternToFindLineNumber?: string) {
+  let line = 0;
   let results: Record<string, any>[] = []; 
   try {
     const fileContent = readFileSync(filePath, 'utf8');

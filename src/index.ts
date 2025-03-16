@@ -35,24 +35,21 @@ const tools =  [
           "properties": {
             "file_path": {
               "type": "string",
-              "description": "The absolute path to the current typescript file (e.g., '/remote/.../src/index.ts')"
-            },
-            "line_number": {
-              "type": "number",
-              "description": "Optional. The line number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the line number of 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' in the current file is 10, you should pass 10 as the line_number.",
-              "required": false
-            },
-            "column_number": {
-              "type": "number",
-              "description": "The column number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the column number of symbol 'StdioServerTransport' in line 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' is 12, you should pass 12 as the column_number."
+              "description": "The absolute path to the current typescript file (e.g., '/remote/.../src/index.ts')",
+              "required": true
             },
             "pattern_to_find_line_number": {
               "type": "string",
-              "description": "Optional. This is preferred over line_number. If provided, this pattern will be used to find the line number in the file instead of using the line_number parameter. The first line containing this pattern will be used.",
-              "required": false
+              "description": "Pass the entire line of the symbol you want to find the definition of. The pattern will be used to find the line number in the file instead of using the line_number parameter which AI Editor often has trouble with. The first line containing this pattern will be used.",
+              "required": true
+            },
+            "column_number": {
+                "type": "number",
+                "description": "The column number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the column number of symbol 'StdioServerTransport' in line 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' is 12, you should pass 12 as the column_number.",
+                "required": true
             }
           },
-          "required": ["file_path", "column_number"]
+          "required": ["file_path", "pattern_to_find_line_number", "column_number"]
         }
     }
   ];
