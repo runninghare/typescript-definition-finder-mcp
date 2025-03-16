@@ -1,7 +1,17 @@
 {
   "name": "ts-def-mcp",
+  "version": "0.1.0",
   "module": "index.ts",
   "type": "module",
+  "bin": {
+    "ts-def-mcp": "./dist/run.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "start": "ts-node-esm src/index.ts --sse",
     "build": "bun build --outfile=dist/run.js --target=node ./src/index.ts",

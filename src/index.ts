@@ -17,7 +17,7 @@ import { SSEServerTransport } from '@modelcontextprotocol/sdk/server/sse.js';
 import express, { type Request, type Response } from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import fs, { readFileSync } from 'fs';
+import fs from 'fs';
 import { readFile } from 'fs/promises';
 import { findDefinition } from './ts-def.js';
 const __filename = fileURLToPath(import.meta.url);
@@ -35,15 +35,18 @@ const tools =  [
           "properties": {
             "file_path": {
               "type": "string",
-              "description": "The absolute path to the current typescript file (e.g., '/remote/.../src/index.ts')"
+              "description": "The absolute path to the current typescript file (e.g., '/remote/.../src/index.ts')",
+              "required": true
             },
             "line_content": {
               "type": "string",
-              "description": "Pass the entire line of the symbol you want to find the definition of. The line content will be used to find the line number in the file instead of directly passing line number which AI Editor often has trouble with. The first line matching the content will be used."
+              "description": "Pass the entire line of the symbol you want to find the definition of. The line content will be used to find the line number in the file instead of directly passing line number which AI Editor often has trouble with. The first line matching the content will be used.",
+              "required": true
             },
             "column_number": {
                 "type": "number",
-                "description": "The column number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the column number of symbol 'StdioServerTransport' in line 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' is 12, you should pass 12 as the column_number."
+                "description": "The column number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the column number of symbol 'StdioServerTransport' in line 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' is 12, you should pass 12 as the column_number.",
+                "required": true
             }
           },
           "required": ["file_path", "line_content", "column_number"]
@@ -115,7 +118,7 @@ class RubiiDbServer {
             if (!request.params.arguments) {
               throw new McpError(ErrorCode.InvalidParams, "Missing arguments");
             }
-            var { file_path, column_number, line_content } = request.params.arguments;
+            const { file_path, column_number, line_content } = request.params.arguments;
             var results = findDefinition(file_path as string, column_number as number, line_content as string);
           } else {
             // throw error
@@ -125,12 +128,10 @@ class RubiiDbServer {
             );
           }
 
-          const fileContent = readFileSync(file_path as string, 'utf8');
-
           return {
             content: [{
               type: "text",
-              text: JSON.stringify(results, null, 2) || `No results found for ${JSON.stringify(request.params.arguments, null, 2)} with file content ${fileContent}`
+              text: JSON.stringify(results, null, 2)
             }]
           };
         } catch (error) {

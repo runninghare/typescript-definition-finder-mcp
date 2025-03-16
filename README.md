@@ -11,27 +11,26 @@ A Model Context Protocol (MCP) server that helps AI code editors find TypeScript
 
 ## Prerequisites
 
-- [Bun](https://bun.sh) v1.2.2 or later
-- Node.js for running the compiled server
+- TypeScript project with `typescript` dependency installed
+- Node.js for running the server
 
-## Installation
+## Installation & Usage
 
-1. Install dependencies:
+This is a Model Context Protocol (MCP) stdio server that requires access to your local filesystem to find TypeScript definitions. To use it:
+
+1. Ensure your project has TypeScript installed as a dependency
+2. Run the following command in your project directory:
 ```bash
-bun install
+npx -y ts-def-mcp@latest
 ```
 
-2. Build the project:
-```bash
-bun run build
-```
+You can integrate this command with various AI code editors that support MCP:
+- Claude Desktop
+- Cursor
+- Windsurf
+- Roo Cline Editor
 
-## Usage
-
-Start the stdio server:
-```bash
-node dist/run.js
-```
+> **Important Note**: Due to the local filesystem access requirements, Docker + WebSocket solutions will not work. Please ignore the installation guide on https://smithery.ai/server/@runninghare/typescript-definition-finder-mcp.
 
 ### Tool Description
 
@@ -112,8 +111,7 @@ The tool returns a JSON response containing:
 
 ### Claude Desktop Example
 
-<img width="828" alt="2025-03-16_22-00-28" src="https://github.com/user-attachments/assets/fa1d583c-12d8-4518-a952-d05b716faeee" />
-
+<img width="766" alt="2025-03-16_19-15-46" src="https://github.com/user-attachments/assets/cbb7cd44-cf3c-430f-a281-0b6187ab3235" />
 
 ## Development
 
