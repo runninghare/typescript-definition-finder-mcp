@@ -36,17 +36,14 @@ const tools =  [
             "file_path": {
               "type": "string",
               "description": "The absolute path to the current typescript file (e.g., '/remote/.../src/index.ts')",
-              "required": true
             },
             "line_content": {
               "type": "string",
               "description": "Pass the entire line of the symbol you want to find the definition of. The line content will be used to find the line number in the file instead of directly passing line number which AI Editor often has trouble with. The first line matching the content will be used.",
-              "required": true
             },
             "column_number": {
                 "type": "number",
                 "description": "The column number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the column number of symbol 'StdioServerTransport' in line 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' is 12, you should pass 12 as the column_number.",
-                "required": true
             }
           },
           "required": ["file_path", "line_content", "column_number"]
