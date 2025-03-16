@@ -39,14 +39,20 @@ const tools =  [
             },
             "line_number": {
               "type": "number",
-              "description": "The line number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the line number of 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' in the current file is 10, you should pass 10 as the line_number."
+              "description": "Optional. The line number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the line number of 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' in the current file is 10, you should pass 10 as the line_number.",
+              "required": false
             },
             "column_number": {
               "type": "number",
               "description": "The column number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the column number of symbol 'StdioServerTransport' in line 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' is 12, you should pass 12 as the column_number."
+            },
+            "pattern_to_find_line_number": {
+              "type": "string",
+              "description": "Optional. This is preferred over line_number. If provided, this pattern will be used to find the line number in the file instead of using the line_number parameter. The first line containing this pattern will be used.",
+              "required": false
             }
           },
-          "required": ["file_path", "line_number", "column_number"]
+          "required": ["file_path", "column_number"]
         }
     }
   ];
@@ -115,8 +121,8 @@ class RubiiDbServer {
             if (!request.params.arguments) {
               throw new McpError(ErrorCode.InvalidParams, "Missing arguments");
             }
-            const { file_path, line_number, column_number } = request.params.arguments;
-            var results = findDefinition(file_path as string, line_number as number, column_number as number);
+            const { file_path, line_number, column_number, pattern_to_find_line_number } = request.params.arguments;
+            var results = findDefinition(file_path as string, line_number as number, column_number as number, undefined, pattern_to_find_line_number as string);
           } else {
             // throw error
             throw new McpError(

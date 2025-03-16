@@ -3,10 +3,21 @@
 import * as ts from 'typescript';
 import { readFileSync, existsSync } from 'fs';
 
-export function findDefinition(filePath: string, line: number, column: number, projectPath?: string) {
+export function findDefinition(filePath: string, line: number, column: number, projectPath?: string, patternToFindLineNumber?: string) {
   let results: Record<string, any>[] = []; 
   try {
     const fileContent = readFileSync(filePath, 'utf8');
+    
+    // If pattern is provided, find the line number
+    if (patternToFindLineNumber) {
+      const lines = fileContent.split('\n');
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].includes(patternToFindLineNumber)) {
+          line = i + 1; // Convert to 1-based line number
+          break;
+        }
+      }
+    }
     
     // Create the language service host
     const servicesHost: ts.LanguageServiceHost = {
