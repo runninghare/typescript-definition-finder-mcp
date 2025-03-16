@@ -121,7 +121,7 @@ This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) i
 
 For development, you can run the server directly using Bun:
 ```bash
-bun run index.ts
+bun run src/index.ts
 ```
 
 ## License
