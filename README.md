@@ -38,7 +38,7 @@ node dist/run.js
 The server provides a `find_typescript_definition` tool with the following capabilities:
 
 - **Tool Name**: `find_typescript_definition`
-- **Trigger Command**: `/ts-def`
+- **Trigger Command**: `/ts-def` (Useful in `Cursor` if you want to force AI editor to find the referenced symbol definition)
 - **Purpose**: Locates the original definition of TypeScript symbols in your codebase
 
 ### Input Parameters
@@ -131,6 +131,10 @@ The tool returns a JSON response containing:
 - The file path where the definition was found
 - The line number of the definition
 - The actual code snippet of the definition
+
+### Claude Desktop Example
+
+<img width="766" alt="2025-03-16_19-15-46" src="https://github.com/user-attachments/assets/cbb7cd44-cf3c-430f-a281-0b6187ab3235" />
 
 ## Development
 
