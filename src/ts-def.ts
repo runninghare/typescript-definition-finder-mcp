@@ -3,17 +3,17 @@
 import * as ts from 'typescript';
 import { readFileSync, existsSync } from 'fs';
 
-export function findDefinition(filePath: string, column: number, projectPath?: string, patternToFindLineNumber?: string) {
+export function findDefinition(filePath: string, column: number, line_content?: string) {
   let line = 0;
   let results: Record<string, any>[] = []; 
   try {
     const fileContent = readFileSync(filePath, 'utf8');
     
     // If pattern is provided, find the line number
-    if (patternToFindLineNumber) {
+    if (line_content) {
       const lines = fileContent.split('\n');
       for (let i = 0; i < lines.length; i++) {
-        if (lines[i].includes(patternToFindLineNumber)) {
+        if (lines[i].includes(line_content)) {
           line = i + 1; // Convert to 1-based line number
           break;
         }
