@@ -29,7 +29,7 @@ dotenv.config();
 const tools =  [
     {
         "name": "find_typescript_definition",
-        "description": "Use /ts-def to trigger this tool. This tool can find the definition of a TypeScript symbol in your codebase. When you encounter an imported symbol (e.g., 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"'), this tool will locate its original definition file and code. Simply provide the current file path and the symbol's exact position (line and column numbers), and it will return the source definition location and code snippet.",
+        "description": "Use /ts-def to trigger this tool. This tool can find the definition of a TypeScript symbol in your codebase. When you encounter an imported symbol (e.g., 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"'), this tool will locate its original definition file and code. Simply provide the current file path, the line content and the symbol's column number, and it will return the source definition location and code snippet.",
         "inputSchema": {
           "type": "object",
           "properties": {
