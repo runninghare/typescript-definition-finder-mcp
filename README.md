@@ -68,7 +68,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 If this line is on line 4 and `StdioServerTransport` starts at column 10, you would use:
 ```json
 {
-  "file_path": "/path/to/project/src/index.ts",
+  "file_path": "~/my-mcp-project/src/index.ts",
   "line_number": 4,
   "column_number": 10
 }
@@ -77,33 +77,10 @@ The output of this tool will be:
 ```json
 [
   {
-    "file": "/Users/rossz/workspace/ai-tools/mcp/ts-def-mcp/node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.d.ts",
+    "file": "~/my-mcp-project/node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.d.ts",
     "type": "Definition",
     "location": "Line 9, Column 22",
-    "codeSnippet": 
-"/**
- * Definition of StdioServerTransport class
- */
-export declare class StdioServerTransport implements Transport {
-    private _stdin;
-    private _stdout;
-    private _readBuffer;
-    private _started;
-    constructor(_stdin?: Readable, _stdout?: Writable);
-    onclose?: () => void;
-    onerror?: (error: Error) => void;
-    onmessage?: (message: JSONRPCMessage) => void;
-    _ondata: (chunk: Buffer) => void;
-    _onerror: (error: Error) => void;
-    
-    /**
-     * Starts listening for messages on stdin.
-     */
-    start(): Promise<void>;
-    private processReadBuffer;
-    close(): Promise<void>;
-    send(message: JSONRPCMessage): Promise<void>;
-}"
+    "codeSnippet": "   8    */\n   9 > export declare class StdioServerTransport implements Transport {\n  10 +     private _stdin;\n  11 +     private _stdout;\n  12 +     private _readBuffer;\n  13 +     private _started;\n  14 +     constructor(_stdin?: Readable, _stdout?: Writable);\n  15 +     onclose?: () => void;\n  16 +     onerror?: (error: Error) => void;\n  17 +     onmessage?: (message: JSONRPCMessage) => void;\n  18 +     _ondata: (chunk: Buffer) => void;\n  19 +     _onerror: (error: Error) => void;\n  20 +     /**\n  21 +      * Starts listening for messages on stdin.\n  22 +      */\n  23 +     start(): Promise<void>;\n  24 +     private processReadBuffer;\n  25 +     close(): Promise<void>;\n  26 +     send(message: JSONRPCMessage): Promise<void>;\n  27   }\n"
   }
 ]
 ```
