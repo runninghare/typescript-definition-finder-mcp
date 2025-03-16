@@ -1,0 +1,30 @@
+{
+  "name": "ts-def-mcp",
+  "module": "index.ts",
+  "type": "module",
+  "scripts": {
+    "start": "ts-node-esm src/index.ts --sse",
+    "build": "bun build --outfile=dist/run.js --target=node ./src/index.ts",
+    "dev": "bun run src/mcp.ts",
+    "test": "bun test"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.7.0",
+    "@types/express": "^5.0.0",
+    "commander": "^13.1.0",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.13.0",
+    "ssh2": "^1.16.0",
+    "ts-node": "^10.9.2",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/commander": "^2.12.5",
+    "@types/node": "^22.13.10"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
+  }
+}
