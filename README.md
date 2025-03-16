@@ -112,7 +112,8 @@ The tool returns a JSON response containing:
 
 ### Claude Desktop Example
 
-<img width="766" alt="2025-03-16_19-15-46" src="https://github.com/user-attachments/assets/cbb7cd44-cf3c-430f-a281-0b6187ab3235" />
+<img width="828" alt="2025-03-16_22-00-28" src="https://github.com/user-attachments/assets/fa1d583c-12d8-4518-a952-d05b716faeee" />
+
 
 ## Development
 
