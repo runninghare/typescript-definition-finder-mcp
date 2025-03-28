@@ -1,5 +1,7 @@
 # TypeScript Definition Finder MCP Server
 
+[![smithery badge](https://smithery.ai/badge/@runninghare/typescript-definition-finder-mcp)](https://smithery.ai/server/@runninghare/typescript-definition-finder-mcp)
+
 A Model Context Protocol (MCP) server that helps AI code editors find TypeScript symbol definitions in your codebase. This tool is particularly useful when you need to locate the original definition of imported symbols, classes, interfaces, or functions in a TypeScript project.
 
 ## Features
@@ -16,7 +18,18 @@ A Model Context Protocol (MCP) server that helps AI code editors find TypeScript
 
 ## Installation & Usage
 
-This is a Model Context Protocol (MCP) stdio server that requires access to your local filesystem to find TypeScript definitions. To use it:
+This is a Model Context Protocol (MCP) stdio server that requires access to your local filesystem to find TypeScript definitions.
+
+### Installing via Smithery
+
+To install TypeScript Definition Finder MCP for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@runninghare/typescript-definition-finder-mcp):
+
+```bash
+npx -y @smithery/cli install @runninghare/typescript-definition-finder-mcp --client claude
+```
+
+### Running the MCP Server
+To use the MCP server:
 
 1. Ensure your project has TypeScript installed as a dependency
 2. Run the following command in your project directory:
@@ -37,7 +50,7 @@ You can integrate this command with various AI code editors that support MCP:
 The server provides a `find_typescript_definition` tool with the following capabilities:
 
 - **Tool Name**: `find_typescript_definition`
-- **Trigger Command**: `/ts-def` (Useful in `Cursor` if you want to force AI editor to find the referenced symbol definition)
+- **Trigger Command**: `/ts-def` (Useful in ‘Cursor’ if you want to force AI editor to find the referenced symbol definition)
 - **Purpose**: Locates the original definition of TypeScript symbols in your codebase
 
 ### Input Parameters
