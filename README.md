@@ -109,9 +109,9 @@ The tool returns a JSON response containing:
 - The line number of the definition
 - The actual code snippet of the definition
 
-### Claude Desktop Example
+### Cursor Calling Example
 
-<img width="766" alt="2025-03-16_19-15-46" src="https://github.com/user-attachments/assets/cbb7cd44-cf3c-430f-a281-0b6187ab3235" />
+<img width="1586" alt="2025-04-04_06-35-36" src="https://github.com/user-attachments/assets/5134d47e-7259-410c-9beb-7bb443b393bf" />
 
 ## Development
 
