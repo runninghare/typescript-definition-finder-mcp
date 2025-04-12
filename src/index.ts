@@ -29,7 +29,7 @@ dotenv.config();
 const tools =  [
     {
         "name": "find_typescript_definition",
-        "description": "Use /ts-def to trigger this tool. This tool can find the definition of a TypeScript symbol in your codebase. When you encounter an imported symbol (e.g., 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"'), this tool will locate its original definition file and code. Simply provide the current file path, the line content and the symbol's column number, and it will return the source definition location and code snippet.",
+        "description": "Use /ts-def to trigger this tool. This tool can find the definition of a TypeScript symbol in your codebase. When you encounter an imported symbol (e.g., 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"'), this tool will locate its original definition file and code. Simply provide the current file path, the symbol you want to find (e.g., 'StdioServerTransport'), and the line content containing that symbol.",
         "inputSchema": {
           "type": "object",
           "properties": {
@@ -37,16 +37,16 @@ const tools =  [
               "type": "string",
               "description": "The absolute path to the current typescript file (e.g., '/remote/.../src/index.ts')",
             },
+            "symbol": {
+              "type": "string",
+              "description": "The TypeScript symbol (variable, class name, interface, type, etc.) you want to find the definition of. This symbol must be present in the line_content.",
+            },
             "line_content": {
               "type": "string",
-              "description": "Pass the entire line of the symbol you want to find the definition of. The line content will be used to find the line number in the file instead of directly passing line number which AI Editor often has trouble with. The first line matching the content will be used.",
-            },
-            "column_number": {
-                "type": "number",
-                "description": "The column number of the symbol (1-based indexing). For instance, you want to find the definition of StdioServerTransport, and the column number of symbol 'StdioServerTransport' in line 'import { StdioServerTransport } from \"@modelcontextprotocol/sdk/server/stdio.js\"' is 12, you should pass 12 as the column_number.",
+              "description": "The entire line containing the symbol you want to find the definition of. The line content will be used to find both the line number in the file and the exact position of the symbol.",
             }
           },
-          "required": ["file_path", "line_content", "column_number"]
+          "required": ["file_path", "symbol", "line_content"]
         }
     }
   ];
@@ -115,8 +115,8 @@ class RubiiDbServer {
             if (!request.params.arguments) {
               throw new McpError(ErrorCode.InvalidParams, "Missing arguments");
             }
-            const { file_path, column_number, line_content } = request.params.arguments;
-            var results = findDefinition(file_path as string, column_number as number, line_content as string);
+            const { file_path, symbol, line_content } = request.params.arguments;
+            var results = findDefinition(file_path as string, symbol as string, line_content as string);
           } else {
             // throw error
             throw new McpError(

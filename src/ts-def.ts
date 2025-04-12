@@ -3,20 +3,28 @@
 import * as ts from 'typescript';
 import { readFileSync, existsSync } from 'fs';
 
-export function findDefinition(filePath: string, column: number, line_content?: string) {
+export function findDefinition(filePath: string, symbol: string, line_content?: string) {
   let line = 0;
   let results: Record<string, any>[] = []; 
   try {
     const fileContent = readFileSync(filePath, 'utf8');
     
-    // If pattern is provided, find the line number
-    if (line_content) {
-      const lines = fileContent.split('\n');
-      for (let i = 0; i < lines.length; i++) {
-        if (lines[i].includes(line_content)) {
-          line = i + 1; // Convert to 1-based line number
-          break;
-        }
+    // If pattern is provided, find the line number and column
+    if (!line_content) {
+      throw new Error('line_content is required to find the symbol');
+    }
+    
+    // Find the column number (1-based) of the symbol in line_content
+    const column = line_content.indexOf(symbol) + 1;
+    if (column === 0) {
+      throw new Error(`Symbol "${symbol}" not found in line_content`);
+    }
+    
+    const lines = fileContent.split('\n');
+    for (let i = 0; i < lines.length; i++) {
+      if (lines[i].includes(line_content)) {
+        line = i + 1; // Convert to 1-based line number
+        break;
       }
     }
     
