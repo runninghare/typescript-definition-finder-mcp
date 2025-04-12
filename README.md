@@ -135,6 +135,9 @@ MCP Output:
 ]
 ```
 
+<img width="1676" alt="2025-04-12_17-06-42" src="https://github.com/user-attachments/assets/8a306ce0-cb8e-4b82-9542-11aaee8a09b6" />
+
+
 ## Development
 
 This project was created using `bun init` in bun v1.2.2. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
