@@ -1,3 +1,5 @@
+[![MseeP Badge](https://mseep.net/pr/runninghare-typescript-definition-finder-mcp-badge.jpg)](https://mseep.ai/app/runninghare-typescript-definition-finder-mcp)
+
 # TypeScript Definition Finder MCP Server
 
 [![smithery badge](https://smithery.ai/badge/@runninghare/typescript-definition-finder-mcp)](https://smithery.ai/server/@runninghare/typescript-definition-finder-mcp)
