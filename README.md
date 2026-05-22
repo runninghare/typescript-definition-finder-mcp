@@ -2,8 +2,6 @@
 
 # TypeScript Definition Finder MCP Server
 
-[![smithery badge](https://smithery.ai/badge/@runninghare/typescript-definition-finder-mcp)](https://smithery.ai/server/@runninghare/typescript-definition-finder-mcp)
-
 A Model Context Protocol (MCP) server that helps AI code editors find TypeScript symbol definitions in your codebase. This tool is particularly useful when you need to locate the original definition of imported symbols, classes, interfaces, or functions in a TypeScript project.
 
 ## Features
@@ -22,14 +20,6 @@ A Model Context Protocol (MCP) server that helps AI code editors find TypeScript
 
 This is a Model Context Protocol (MCP) stdio server that requires access to your local filesystem to find TypeScript definitions.
 
-### Installing via Smithery
-
-To install TypeScript Definition Finder MCP for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@runninghare/typescript-definition-finder-mcp):
-
-```bash
-npx -y @smithery/cli install @runninghare/typescript-definition-finder-mcp --client claude
-```
-
 ### Running the MCP Server
 To use the MCP server:
 
@@ -41,11 +31,37 @@ npx -y ts-def-mcp@latest
 
 You can integrate this command with various AI code editors that support MCP:
 - Claude Desktop
+- Claude Code
+- Codex
 - Cursor
 - Windsurf
 - Roo Cline Editor
 
-> **Important Note**: Due to the local filesystem access requirements, Docker + WebSocket solutions will not work. Please ignore the installation guide on https://smithery.ai/server/@runninghare/typescript-definition-finder-mcp.
+> **Important Note**: Due to the local filesystem access requirements, Docker + WebSocket solutions will not work.
+
+### Installing in Claude Code
+
+Add the server with the Claude Code CLI:
+
+```bash
+claude mcp add ts-def -- npx -y ts-def-mcp@latest
+```
+
+Or, to add it for all your projects (user scope):
+
+```bash
+claude mcp add --scope user ts-def -- npx -y ts-def-mcp@latest
+```
+
+### Installing in Codex
+
+Add the server to your Codex MCP config (`~/.codex/config.toml`):
+
+```toml
+[mcp_servers.ts-def]
+command = "npx"
+args = ["-y", "ts-def-mcp@latest"]
+```
 
 ### Tool Description
 
